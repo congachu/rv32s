@@ -92,7 +92,7 @@ PC 0x00040014 invalid instruction 0x00000000
 
 1. 지원하지 않는 명령어가 fetch되면 **실행하지 않고** 종료 처리 (표준 출력 + `data.out` 저장)
 2. 1,000,000개 실행 후 다음 fetch가 invalid이면 정상 종료
-3. 1,000,000개 실행 후 다음 fetch가 지원 명령어이면 실행하지 않고 실행 한도 초과로 비정상 종료 [종료 코드: 1]
+3. 1,000,000개 실행 후 다음 fetch가 지원 명령어이면 실행하지 않고 실행 한도 초과로 비정상 종료
 
 ## 5. 테스트
 
@@ -108,15 +108,11 @@ bash tests/run_tests.sh
 
 | 테스트 | 목적 |
 |--------|------|
-| `t01_basic` | 명세서 7절 예제 (lui, addi, add, sw) — 기대 `data.out` 앞 4바이트 `0c 00 00 00` |
-| `t02_negative_imm` | 음수 즉시값, 부호 확장 |
-| `t03_signed_cmp` | `blt`/`bge` 부호 비교 (`0xffffffff` vs `1`) |
-| `t04_branch_offset` | 전방/후방 분기 PC 계산 |
-| `t05_x0_fixed` | x0에 쓰기를 시도해도 0 유지 |
-| `t06_overflow` | add/sub 32비트 래핑 |
-| `t07_lw_sw` | lw/sw little-endian 및 data 영역 경계 |
-| `t08_invalid_funct` | opcode는 맞지만 funct3/funct7이 다른 명령어 → invalid |
-| `t09_empty_data` | `data.bin` 0바이트 → 1,024바이트 0 출력 |
+| `t01_basic_and_store` | 기본 연산과 메모리 쓰기 |
+| `t02_randomized_1` | 무작위로 생성된 명령어 시퀀스 1 |
+| `t03_randomzied_2` | 무작위로 생성된 명령어 시퀀스 2 |
+| `t04_invalid_ffffffff` | 정의되지 않은 명령어 종료 처리 |
+| `t05_backward_signed_branch` | 음수 방향 분기 처리 |
 
 ## 6. 알려진 제한사항
 
