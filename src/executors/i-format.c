@@ -21,6 +21,8 @@ int __addi(simulator_t* simulator)
             simulator->general_perpose_registers[rs1] + (uint32_t)imm;
     }
 
+    simulator->program_counter += 4;
+
     return 1;
 }
 
@@ -44,6 +46,8 @@ int __andi(simulator_t* simulator)
             simulator->general_perpose_registers[rs1] & (uint32_t)imm;
     }
 
+    simulator->program_counter += 4;
+
     return 1;
 }
 
@@ -66,6 +70,8 @@ int __ori(simulator_t* simulator)
         simulator->general_perpose_registers[rd] =
             simulator->general_perpose_registers[rs1] | (uint32_t)imm;
     }
+
+    simulator->program_counter += 4;
 
     return 1;
 }
@@ -100,6 +106,8 @@ int __lw(simulator_t* simulator)
     // x0이 아닐 경우만
     if (rd != 0)
         simulator->general_perpose_registers[rd] = value;
+
+    simulator->program_counter += 4;
 
     return 1;
 }
