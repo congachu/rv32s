@@ -40,5 +40,7 @@ int __sw(simulator_t* simulator)
     if (!try_write_word_simulator(simulator, value, addr))
         return 0;
 
+    simulator->program_counter += 4;
+    
     return 1;
 }
